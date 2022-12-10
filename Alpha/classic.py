@@ -7,3 +7,4 @@ async def classic(_, m):
     if PLAYING:
         return await m.edit("***ALREADY IN GAME***")
     PLAYING = True
+    return await m.edit("***STARTED***")
