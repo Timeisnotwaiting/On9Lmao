@@ -7,4 +7,4 @@ async def endf(_, m):
     if not PLAYING:
         return await m.edit("***NO GAME TO TERMINATE***")
     PLAYING = False
-    return await m.edit("***TERMINATED***"
+    return await m.edit("***TERMINATED***")
