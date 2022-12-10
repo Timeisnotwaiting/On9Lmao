@@ -3,6 +3,8 @@ from english_words import english_words_set as ews
 
 PLAYING = False
 
+PLAYERS = []
+
 BIN = []
 def get_classic_word(letter, length):
     global BIN
