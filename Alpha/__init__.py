@@ -4,7 +4,7 @@ from english_words import english_words_set as ews
 PLAYING = False
 
 BIN = []
-def get_word(letter, length):
+def get_classic_word(letter, length):
     global BIN
     for x in ews:
         if x in BIN:
