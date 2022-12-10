@@ -13,5 +13,5 @@ def get_classic_word(letter, length):
             continue
         if x[0].lower() == letter.lower():
             if len(x) == length:
-                BIN.append(x)
+                BIN.append(x.lower())
                 return x
