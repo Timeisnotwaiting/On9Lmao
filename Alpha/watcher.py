@@ -1,4 +1,4 @@
-from pyrogram import Client, filters
+from pyrogram import Client, filters, enums
 from . import BIN, PLAYING, get_classic_word, on9_id
 
 name = None
@@ -22,13 +22,14 @@ async def watcher(_, m):
         formed_name += h
         formed_name += " "
     if formed_name == name:
+        await _.send_chat_action(m.chat.id, enums.ChatAction.TYPING)
         ind = txt.index("with")
         letter = txt[ind+1]
         ind = txt.index("least")
         length = int(txt[ind+1])
         g = get_classic_word(letter, length)
+        await _.send_chat_action(m.chat.id, enums.ChatAction.CANCEL)
         await _.send_message(m.chat.id, g)
-
     
     
        
