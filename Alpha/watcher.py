@@ -1,17 +1,34 @@
 from pyrogram import Client, filters
-from . import BIN, PLAYERS, PLAYING, get_classic_word, on9_id
+from . import BIN, PLAYING, get_classic_word, on9_id
 
+name = None
 @Client.on_message(group=1)
 async def watcher(_, m):
-    global PLAYERS, BIN
-    if not PLAYERS:
-        if m.from_user.id != on9_id:
-            return
-        txt = m.text.split()
-        if "Turn" in txt and "order:" in txt:
-            ind = txt.index("order:")
-            tot = len(txt)
-            left = tot-(ind+1)
-            for i in range(1, left+1):
-                PLAYERS.append(txt[i])
+    global BIN, name
+    if not PLAYING:
+        return
+    if not name:
+        name = (await _.get_me()).first_name + " "
+    if m.from_user.id != on9_id:
+        return
+    txt = m.text.split()
+    if "is" in txt and "accepted." in txt:
+        BIN.append(txt[0].lower())
+        return
+    ind = txt.index("Next:")
+    new_l = txt[1:ind]
+    formed_name = ""
+    for h in new_l:
+        formed_name += h
+        formed_name += " "
+    if formed_name == name:
+        ind = txt.index("with")
+        letter = txt[ind+1]
+        ind = txt.index("least")
+        length = int(txt[ind+1])
+        g = get_classic_word(letter, length)
+        await _.send_message(m.chat.id, g)
+
+    
+    
        
