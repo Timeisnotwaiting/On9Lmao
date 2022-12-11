@@ -17,10 +17,11 @@ async def classic(_, m):
 
 @Client.on_message(filters.command(["end", "stop", "terminate"], hl) & filters.me)
 async def endf(_, m):
-    global PLAYING
+    global PLAYING, BIN
     if not PLAYING:
         return await m.edit("***NO GAME TO TERMINATE***")
     PLAYING = False
+    BIN.clear()
     return await m.edit("***TERMINATED***")
 
 name = None
@@ -49,6 +50,10 @@ async def watcher(_, m):
         length = int(txt[ind+1])
         if length <= 5:
             time.sleep(random.choice([3, 4, 5]))
+        elif length > 5 and length <= 10:
+            time.sleep(random.choice([6, 7, 8]))
+        else:
+            time.sleep(random.choice([9, 10, 11]))
         g = get_classic_word(letter, length, BIN)
         await _.send_chat_action(m.chat.id, enums.ChatAction.CANCEL)
         await _.send_message(m.chat.id, g)
