@@ -26,19 +26,14 @@ async def watcher(_, m):
     if not PLAYING:
         return
     if not name:
-        name = (await _.get_me()).first_name + " "
+        name = (await _.get_me()).first_name.split()[0]
     if m.from_user.id != on9_id:
         return
     txt = m.text.split()
     if "is" in txt and "accepted." in txt:
         BIN.append(txt[0].lower())
         return
-    ind = txt.index("Next:")
-    new_l = txt[1:ind]
-    formed_name = ""
-    for h in new_l:
-        formed_name += h
-        formed_name += " "
+    formed_name = txt[6]
     if formed_name == name:
         await _.send_chat_action(m.chat.id, enums.ChatAction.TYPING)
         ind = txt.index("with")
