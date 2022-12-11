@@ -36,7 +36,7 @@ async def watcher(_, m):
     if txt[0].lower() == "turn:":
         formed_name = txt[1]
     else:
-        formed_name = None
+        return
     if formed_name == name:
         await _.send_chat_action(m.chat.id, enums.ChatAction.TYPING)
         ind = txt.index("with")
