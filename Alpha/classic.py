@@ -42,7 +42,7 @@ async def watcher(_, m):
     if formed_name == name:
         await _.send_chat_action(m.chat.id, enums.ChatAction.TYPING)
         ind = txt.index("with")
-        letter = txt[ind+1]
+        letter = txt[ind+1].lower()
         ind = txt.index("least")
         length = int(txt[ind+1])
         g = get_classic_word(letter, length, BIN)
