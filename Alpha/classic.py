@@ -3,6 +3,8 @@ from . import *
 
 PLAYING = False
 
+BIN = []
+
 @Client.on_message(filters.command("classic", hl) & filters.me)
 async def classic(_, m):
     global PLAYING, BIN
@@ -43,6 +45,6 @@ async def watcher(_, m):
         letter = txt[ind+1]
         ind = txt.index("least")
         length = int(txt[ind+1])
-        g = get_classic_word(letter, length)
+        g = get_classic_word(letter, length, BIN)
         await _.send_chat_action(m.chat.id, enums.ChatAction.CANCEL)
         await _.send_message(m.chat.id, g)
