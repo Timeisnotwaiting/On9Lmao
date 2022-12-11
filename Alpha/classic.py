@@ -1,5 +1,7 @@
 from pyrogram import Client, filters, enums
 from . import *
+import time
+import random
 
 PLAYING = False
 
@@ -45,6 +47,8 @@ async def watcher(_, m):
         letter = txt[ind+1].lower()
         ind = txt.index("least")
         length = int(txt[ind+1])
+        if length <= 5:
+            time.sleep(random.choice([3, 4, 5]))
         g = get_classic_word(letter, length, BIN)
         await _.send_chat_action(m.chat.id, enums.ChatAction.CANCEL)
         await _.send_message(m.chat.id, g)
