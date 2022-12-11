@@ -38,11 +38,26 @@ async def watcher(_, m):
     if "is" in txt and "accepted." in txt:
         BIN.append(txt[0].lower())
         return
+    if "has" in txt and "been" in txt and "used." in txt:
+        user_n = m.reply_to_message.from_user.first_name.split()[0]
+        if name == user_n:
+            letter = BIN[-1][0]
+            length = len(BIN[-1])
+            g = get_classic_word(letter, length, BIN)
+            return await _.send_message(m.chat.id, g)
+    if "not" in txt and "in" in txt and "my" in txt and "list" in txt:
+        user_n = m.reply_to_message.from_user.first_name.split()[0]
+        if name == user_n:
+            letter = BIN[-1][0]
+            length = len(BIN[-1])
+            g = get_classic_word(letter, length, BIN)
+            return await _.send_message(m.chat.id, g)
     if txt[0].lower() == "turn:":
         formed_name = txt[1]
     else:
         return
     if formed_name == name:
+        time.sleep(1)
         await _.send_chat_action(m.chat.id, enums.ChatAction.TYPING)
         ind = txt.index("with")
         letter = txt[ind+1].lower()
@@ -55,5 +70,5 @@ async def watcher(_, m):
         else:
             time.sleep(random.choice([9, 10, 11]))
         g = get_classic_word(letter, length, BIN)
-        await _.send_chat_action(m.chat.id, enums.ChatAction.CANCEL)
         await _.send_message(m.chat.id, g)
+        await _.send_chat_action(m.chat.id, enums.ChatAction.CANCEL)
