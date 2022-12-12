@@ -1,6 +1,9 @@
 from config import COMMAND_HANDLER as hl, on9_id
 from english_words import english_words_set as ews
 from hlpl_english_words import english_words
+import time
+
+startTime = time.time()
 
 case=['adjective','adverb','noun-singular','noun-plural','verb','article']
 
