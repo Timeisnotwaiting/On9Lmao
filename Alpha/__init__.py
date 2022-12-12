@@ -18,6 +18,7 @@ def load_words():
         alpha_words.append(jerk)
 
 def get_classic_word(letter, length, BIN):
+    load_words()
     for x in alpha_words:
         if x.lower() in BIN:
             continue
