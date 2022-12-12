@@ -2,6 +2,7 @@ from pyrogram import Client, filters, enums
 from . import *
 import time
 import random
+from .watchers import classic_watcher
 
 PLAYING = False
 
@@ -25,7 +26,7 @@ async def endf(_, m):
     return await m.edit("***TERMINATED***")
 
 name = None
-@Client.on_message(group=1)
+@Client.on_message(group=classic_watcher)
 async def watcher(_, m):
     global BIN, name
     if not PLAYING:
