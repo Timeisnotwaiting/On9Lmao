@@ -31,4 +31,3 @@ async def pinging(_, m):
     upt = get_readable_time(int(time.time()-startTime))
     end = time.time()
     return await m.edit(f"Uptime : {upt}\n\nPing : {(end-st)*1000}ms")
-Give feedback
