@@ -6,6 +6,8 @@ from .watchers import classic_watcher
 
 PLAYING = False
 
+LAST = None
+
 BIN = []
 
 @Client.on_message(filters.command("classic", hl) & filters.me)
@@ -28,7 +30,7 @@ async def endf(_, m):
 name = None
 @Client.on_message(group=classic_watcher)
 async def watcher(_, m):
-    global BIN, name
+    global BIN, name, LAST
     if not PLAYING:
         return
     if not name:
@@ -42,15 +44,15 @@ async def watcher(_, m):
     if "has" in txt and "been" in txt and "used." in txt:
         user_n = m.reply_to_message.from_user.first_name.split()[0]
         if name == user_n:
-            letter = BIN[-1][0]
-            length = len(BIN[-1])
+            letter = LAST[0]
+            length = len(LAST)
             g = get_classic_word(letter, length, BIN)
             return await _.send_message(m.chat.id, g)
     if "not" in txt and "in" in txt and "my" in txt and "list" in txt:
         user_n = m.reply_to_message.from_user.first_name.split()[0]
         if name == user_n:
-            letter = BIN[-1][0]
-            length = len(BIN[-1])
+            letter = LAST[0]
+            length = len(LAST)
             g = get_classic_word(letter, length, BIN)
             return await _.send_message(m.chat.id, g)
     if txt[0].lower() == "turn:":
@@ -58,18 +60,21 @@ async def watcher(_, m):
     else:
         return
     if formed_name == name:
+        st_imp = time.time()
         time.sleep(1)
         await _.send_chat_action(m.chat.id, enums.ChatAction.TYPING)
         ind = txt.index("with")
         letter = txt[ind+1].lower()
         ind = txt.index("least")
         length = int(txt[ind+1])
-        if length <= 5:
-            time.sleep(random.choice([3, 4, 5]))
-        elif length > 5 and length <= 10:
-            time.sleep(random.choice([6, 7, 8]))
-        else:
-            time.sleep(random.choice([9, 10, 11]))
         g = get_classic_word(letter, length, BIN)
+        LAST = g
+        end_imp = time.time()
+        diff = int(end_imp - st_imp)
+        await _.send_chat_action(m.chat.id, enums.ChatAction.TYPING)
+        if length > 5 and length <= 10:
+            time.sleep(random.choice([3, 4, 5]))
+        else:
+            time.sleep(random.choice([7-diff, 8-diff, 9-diff]))
         await _.send_message(m.chat.id, g)
         await _.send_chat_action(m.chat.id, enums.ChatAction.CANCEL)
