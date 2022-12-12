@@ -7,6 +7,9 @@ case=['adjective','adverb','noun-singular','noun-plural','verb','article']
 alpha_words = []
 
 def load_words():
+    global alpha_words
+    if len(alpha_words) > 1300000:
+        return
     for mad in case:
         for red in english_words.get(mad):
             for dy in red:
@@ -19,7 +22,7 @@ def get_classic_word(letter, length, BIN):
         if x.lower() in BIN:
             continue
         if x[0].lower() == letter.lower():
-            if len(x) == length:
+            if len(x) >= length:
                 BIN.append(x.lower())
                 return x
 
