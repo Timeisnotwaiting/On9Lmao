@@ -72,9 +72,6 @@ async def watcher(_, m):
         end_imp = time.time()
         diff = int(end_imp - st_imp)
         await _.send_chat_action(m.chat.id, enums.ChatAction.TYPING)
-        if length > 5 and length <= 10:
-            time.sleep(random.choice([3, 4, 5]))
-        else:
-            time.sleep(random.choice([7-diff, 8-diff, 9-diff]))
         await _.send_message(m.chat.id, g)
+        await _.send_message(m.chat.id, f"{str(diff)[0:4]}")
         await _.send_chat_action(m.chat.id, enums.ChatAction.CANCEL)
