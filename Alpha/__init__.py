@@ -5,28 +5,48 @@ import time
 
 startTime = time.time()
 
+AM = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m"]
+
 case=['adjective','adverb','noun-singular','noun-plural','verb','article']
 
-alpha_words = []
+A_M = []
+N_Z = []
 
 def load_words():
-    global alpha_words
+    global A_M, N_Z
     if len(alpha_words) > 1300000:
         return
     for mad in case:
         for red in english_words.get(mad):
             for dy in red:
-                alpha_words.append(dy)
+                if dy[0].lower() in AM:
+                    A_M.append(dy)
+                else:
+                    N_Z.append(dy)
     for jerk in ews:
-        alpha_words.append(jerk)
+        if jerk[0].lower() in AM:
+            A_M.append(jerk)
+        else:
+            N_Z.append(jerk)
 
 def get_classic_word(letter, length, BIN):
-    for x in alpha_words:
-        if x.lower() in BIN:
-            continue
-        if x[0].lower() == letter.lower():
-            if len(x) >= length:
-                BIN.append(x.lower())
-                return x
+    if letter.lower() in AM:
+        for x in A_M:
+            if x.lower() in BIN:
+                continue
+            if x[0].lower() == letter.lower():
+                if len(x) >= length:
+                    BIN.append(x.lower())
+                    return x
+    else:
+        for x in N_Z:
+            if x.lower() in BIN:
+                continue
+            if x[0].lower() == letter.lower():
+                if len(x) >= length:
+                    BIN.append(x.lower())
+                    return x
+
+    
 
 load_words()
