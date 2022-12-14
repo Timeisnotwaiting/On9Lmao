@@ -14,18 +14,19 @@ BIN = []
 async def classic(_, m):
     global PLAYING, BIN
     if PLAYING:
-        return await m.edit("***ALREADY IN GAME***")
+        return await m.edit("**ALREADY IN GAME**")
     PLAYING = True
-    return await m.edit("***STARTED***")
+    return await m.edit("**STARTED**")
 
 @Client.on_message(filters.command(["end", "stop", "terminate"], hl) & filters.me)
 async def endf(_, m):
     global PLAYING, BIN
     if not PLAYING:
-        return await m.edit("***NO GAME TO TERMINATE***")
+        return await m.edit("**NO GAME TO TERMINATE**")
     PLAYING = False
+    load_words()
     BIN.clear()
-    return await m.edit("***TERMINATED***")
+    return await m.edit("**TERMINATED**")
 
 name = None
 @Client.on_message(group=classic_watcher)
