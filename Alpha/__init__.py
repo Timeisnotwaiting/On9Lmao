@@ -36,6 +36,7 @@ def get_classic_word(letter, length, BIN):
                 continue
             if x[0].lower() == letter.lower():
                 if len(x) >= length:
+                    A_M.remove(x)
                     BIN.append(x.lower())
                     return x
     else:
@@ -44,6 +45,7 @@ def get_classic_word(letter, length, BIN):
                 continue
             if x[0].lower() == letter.lower():
                 if len(x) >= length:
+                    N_Z.remove(x)
                     BIN.append(x.lower())
                     return x
 
