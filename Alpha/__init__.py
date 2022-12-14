@@ -14,7 +14,7 @@ N_Z = []
 
 def load_words():
     global A_M, N_Z
-    if len(alpha_words) > 1300000:
+    if len(A_M + N_Z) > 1300000:
         return
     for mad in case:
         for red in english_words.get(mad):
